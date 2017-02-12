@@ -12,6 +12,7 @@ class GramsController < ApplicationController
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
+    end
   end
 
   private
@@ -19,5 +20,4 @@ class GramsController < ApplicationController
   def gram_params
     params.require(:gram).permit(:message)
   end
-
 end
