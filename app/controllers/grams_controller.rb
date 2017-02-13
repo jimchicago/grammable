@@ -1,10 +1,18 @@
 class GramsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+
   def new
     @gram = Gram.new
   end
   
   def index
+  end
+
+  def show
+    @gram = Gram.find_by_id(params[:id])
+    if @gram.blank?
+      render plain: 'Not Found :(', status: :not_found 
+    end
   end
 
   def create
@@ -16,7 +24,7 @@ class GramsController < ApplicationController
     end
   end
 
-  private
+   private
 
   def gram_params
     params.require(:gram).permit(:message)

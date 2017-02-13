@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'grams#index'
-  resource :grams, only: [:new, :create]
-  resource :users, only: [:new, :create]
+  resources :grams, only: [:new, :create, :show]
+  resources :users, only: [:new, :create]
 
 end
 
