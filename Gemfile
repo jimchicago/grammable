@@ -28,12 +28,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
-end
+# gem 'capistrano-rails', group: :development 
+  
+# end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -44,7 +41,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   group :development, :test do
+    # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+    gem 'byebug', platform: :mri
     gem 'rspec-rails', '~> 3.5'
+    gem 'factory_girl_rails', '~> 4.0'
   end
   
 end
