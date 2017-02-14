@@ -1,8 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe GramsController, type: :controller do
+
+  describe "grams#edit action" do
+    it "should show the edit form if the requested gram is found" do
+      gram = FactoryGirl.create(:gram)
+      get :edit, params: { id: gram.id }
+      expect(response).to have_http_status(:success)
+    end
+
+    it "should return a 404 error message if the requested gram is not found" do
+      get :edit, params: { id: 'TACODOG' }
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+
   describe "grams#show action" do
-    it "should successfully show the page if the gram is found" do
+    it "should show the page if the requested gram is found" do
       gram = FactoryGirl.create(:gram)
       get :show, params: { id: gram.id }
       expect(response).to have_http_status(:success)
@@ -15,7 +29,7 @@ RSpec.describe GramsController, type: :controller do
   end
 
   describe "grams#index action" do
-    it "should successfully show the page" do
+    it "should show the page that lists grams" do
       get :index
       expect(response).to have_http_status(:success)
     end
@@ -27,7 +41,7 @@ RSpec.describe GramsController, type: :controller do
       expect(response).to redirect_to new_user_session_path
     end
 
-    it "should successfully show the new form" do
+    it "should show the new-gram form" do
       user = FactoryGirl.create(:user)
       sign_in user
 
@@ -43,7 +57,7 @@ RSpec.describe GramsController, type: :controller do
       expect(response).to redirect_to new_user_session_path
     end
 
-    it "should successfully create a new gram in our database" do
+    it "should create a new gram in our database" do
       user = FactoryGirl.create(:user)
       sign_in user
 
