@@ -64,25 +64,56 @@ RSpec.describe GramsController, type: :controller do
       expect(response).to have_http_status(:unprocessable_entity)
       expect(Gram.count).to eq 0
     end
-
   end
 
   describe "grams#edit action" do
+    it "should allow ONLY the user who created a gram to edit that gram" do
+      gram = FactoryGirl.create(:gram) # creates a gram & a user associated w/it
+      user = FactoryGirl.create(:user) # creates another user (who didn't create gram)
+      sign_in user
+      get :edit, params: { id: gram.id }
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it "shouldn't let unauthenticated users edit grams" do
+      gram = FactoryGirl.create(:gram)
+      get :edit, params: { id: gram.id }
+      expect(response).to redirect_to new_user_session_path
+    end
+
     it "should show the edit form if the requested gram is found" do
       gram = FactoryGirl.create(:gram)
+      sign_in gram.user
       get :edit, params: { id: gram.id }
       expect(response).to have_http_status(:success)
     end
 
     it "should return a 404 error message if the requested gram is not found" do
+      user = FactoryGirl.create(:user)
+      sign_in user
       get :edit, params: { id: 'TACODOG' }
       expect(response).to have_http_status(:not_found)
     end
   end
 
   describe "grams#update action" do
+    it "should allow ONLY the user who created a gram to update that gram" do
+      gram = FactoryGirl.create(:gram) # creates a gram & a user associated w/it
+      user = FactoryGirl.create(:user) # creates another user (who didn't create gram)
+      sign_in user
+      patch :update, params: { id: gram.id, gram: { message: 'wahoo' } }
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it "shouldn't let unauthenticated users update grams" do
+      gram = FactoryGirl.create(:gram)
+      patch :update, params: { id: gram.id, gram: { message: "Hello" } }
+      expect(response).to redirect_to new_user_session_path
+    end
+
     it "should allow users to update grams" do
       gram = FactoryGirl.create(:gram, message: 'Initial Value')
+      sign_in gram.user
       patch :update, params: { id: gram.id, gram: { message: 'Changed!' } }
       expect(response).to redirect_to root_path
       gram.reload
@@ -90,12 +121,15 @@ RSpec.describe GramsController, type: :controller do
     end
 
     it "should have http 404 error if the gram cannot be found" do
+      user = FactoryGirl.create(:user)
+      sign_in user
       patch :update, params: { id: "YOLOSWAG", gram: { message: 'Changed' } }
       expect(response).to have_http_status(:not_found)
     end
 
     it "should render the edit form with http status unprocessable_entity" do
       gram = FactoryGirl.create(:gram, message: 'Initial Value')
+      sign_in gram.user
       patch :update, params: { id: gram.id, gram: { message: '' } }
       expect(response).to have_http_status(:unprocessable_entity)
       gram.reload
@@ -104,20 +138,34 @@ RSpec.describe GramsController, type: :controller do
   end
 
   describe "grams#destroy action" do
+    it "should allow ONLY the user who created a gram to destroy that gram" do
+      gram = FactoryGirl.create(:gram)
+      user = FactoryGirl.create(:user)
+      sign_in user
+      delete :destroy, params: { id: gram.id }
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it "shouldn't let unauthenticated users destroy grams" do
+      gram = FactoryGirl.create(:gram)
+      delete :destroy, params: { id: gram.id }
+      expect(response).to redirect_to new_user_session_path
+    end
+
     it "should allow users to destroy grams" do
       gram = FactoryGirl.create(:gram)
+      sign_in gram.user
       delete :destroy, params: { id: gram.id }
       expect(response).to redirect_to root_path
       gram = Gram.find_by_id(gram.id)
       expect(gram).to eq nil
     end
 
-    it "should return a 404 message if the requested gram cannot be found" do
+    it "should return a 404 if we cannot find a gram with the id requested" do
+      user = FactoryGirl.create(:user)
+      sign_in user
       delete :destroy, params: { id: 'SPACEDUCK' }
       expect(response).to have_http_status(:not_found)
     end
   end
-
-
-
 end
