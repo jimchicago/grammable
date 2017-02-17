@@ -11,7 +11,7 @@
   <body>
   <%= link_to image_tag("https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Graham-Cracker-Stack.jpg/250px-Graham-Cracker-Stack.jpg"), root_url %>
   <% if current_user %>
-    You are signed in as <%= current_user.email %>.
+    You are signed in as: <%= current_user.email %>
     <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
   <% else %>
     <%= link_to "Log In", new_user_session_path %>

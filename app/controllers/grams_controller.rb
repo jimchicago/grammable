@@ -2,10 +2,11 @@ class GramsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def new
-    @gram = Gram.new
+    @gram = Gram.new # This variable's scope is limited to an instance of this controller. Each HTTP request creates a new instance of the controller and calls the action
   end
   
   def index
+    @grams = Gram.all
   end
 
   def show
@@ -55,7 +56,7 @@ class GramsController < ApplicationController
   private
 
   def gram_params
-    params.require(:gram).permit(:message)
+    params.require(:gram).permit(:message, :picture)
   end
 
   def render_not_found(status=:not_found)
