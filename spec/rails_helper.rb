@@ -30,6 +30,7 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Devise::Test::ControllerHelpers, type: :controller
+  include ActionDispatch::TestProcess
   config.include Devise::Test::ControllerHelpers, type: :view
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
