@@ -24,7 +24,7 @@ body {
   padding-left: 8px;
 }
 
-.brand {
+.brand a {
   color: #125688;
   font-size: 35px;
   font-family: 'Pacifico', cursive;
@@ -37,6 +37,10 @@ body {
   border: 1px solid #e8e8e8;
   margin-top: 40px;
   padding: 0;
+}
+
+.gramsh3 + .card {
+  margin-top: 25px;
 }
 
 .card p, .card .message {
@@ -69,6 +73,7 @@ input {
   width: 100%;
   border: none;
   font-size: 24px;
+  font-family: Pacifico, sans-serif;
   color: white;
   margin-top: 10px;
 }
@@ -89,7 +94,7 @@ p.help-block {
 .gram-actions a {
   font-weight: bold;
   font-size: 16px;
-  margin: 0 10px 0 20px;
+  margin: 20px 10px 20px 22px;
 }
 
 .comment {
@@ -105,4 +110,11 @@ p.help-block {
   color: #125688;
   font-weight: bold;
   font-size: 18px;
+}
+
+.control-label {
+  margin-right: 8px;
+}
+abbr[title] {
+  text-decoration: none;
 }
