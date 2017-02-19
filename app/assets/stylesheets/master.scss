@@ -1,6 +1,108 @@
 @import "bootstrap";
 
-.grampic {
-  float:left;
-  width:120px;
+body {
+  background-color: #f6f6f6;
+  font-size: 110%;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.top-nav {
+  background-color: white;
+  border: 1px solid #edeeee;
+  height: 90px;
+  padding: 15px 0;
+}
+
+.top-nav .add {
+  margin-top: 12px;
+}
+
+.top-nav .add a {
+  font-weight: bold;
+  color: #125688;
+  font-size: 104%;
+  padding-left: 8px;
+}
+
+.brand {
+  color: #125688;
+  font-size: 35px;
+  font-family: 'Pacifico', cursive;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: .33rem;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  border: 1px solid #e8e8e8;
+  margin-top: 40px;
+  padding: 0;
+}
+
+.card p, .card .message {
+  font-size: 18px;
+  margin: 20px;
+}
+
+.handle {
+  margin: 10px;
+  color: #125688;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.card.form {
+  padding: 20px;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.my-btn {
+  background-color: #125688;
+  width: 100%;
+  border: none;
+  font-size: 24px;
+  color: white;
+  margin-top: 10px;
+}
+
+.input.boolean {
+  margin: 5px 0 0 18px;
+}
+
+.input.boolean label {
+  margin-top: 5px;
+  line-height: 44px;
+}
+
+p.help-block {
+  margin: 20px 4px;
+}
+
+.gram-actions a {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 10px 0 20px;
+}
+
+.comment {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.comments {
+  padding: 20px;
+}
+
+.comment_handle {
+  color: #125688;
+  font-weight: bold;
+  font-size: 18px;
 }

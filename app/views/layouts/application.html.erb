@@ -3,29 +3,40 @@
   <head>
     <title>Grammable</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,100,300,600,700' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
-  <%= link_to image_tag("https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Graham-Cracker-Stack.jpg/250px-Graham-Cracker-Stack.jpg"), root_url %>
-  <% if current_user %>
-    You are signed in as: <%= current_user.email %>
-    <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Log In", new_user_session_path %>
-    &nbsp;
-    <%= link_to "Sign Up", new_user_registration_path %>
-  <% end %>
-    <!-- These two p tags added per instructions shown after installing the devise gem -->
-    <% if notice.present? %>
-      <p class="alert alert-info"><%= notice %></p>
-    <% end %>
-    <% if alert.present? %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
+    <div class="top-nav">
+      <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+        <div class="brand float-left">
+          Grammable
+        </div>
+        <div class="add float-right">
+          <% if current_user %>
+            Welcome, <%= current_user.email %>
+            <%= link_to "New Post", new_gram_path %>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to "Log In", new_user_session_path %>
+            <%= link_to "Sign Up", new_user_registration_path %>
+          <% end %>
+          <!-- These two p tags added per instructions shown after installing the devise gem -->
+          <% if notice.present? %>
+             <p class="alert alert-info"><%= notice %></p>
+          <% end %>
+          <% if alert.present? %>
+            <p class="alert alert-danger"><%= alert %></p>
+          <% end %>
+        </div>
+      </div>
+      <br class="clear-fix" />
+    </div>
 
     <%= yield %>
+
   </body>
 </html>
