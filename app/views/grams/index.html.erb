@@ -23,6 +23,18 @@
       <%= simple_form_for Comment.new, url: gram_comments_path(gram) do |f| %>
         <%= f.input :message %>
         <%= f.submit 'Add Your Comment', class: 'my-btn' %>
+        <br /><br />
+      <% end %>
+
+      <% if gram.comments.present? %>
+      <div class="col-xs-12">
+        <blockquote>  
+          <% gram.comments.each do |comment| %>
+            <span class="commenter">From <%= comment.user.email %>: </span><%= comment.message %>
+            <br /><br />
+          <% end %>
+        </blockquote>
+      </div>
       <% end %>
     </div>
   </div>

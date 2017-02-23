@@ -40,7 +40,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  group :development, :test do
+  group :development, :test do  # Makes these gems available in both TEST & DEVELOPMENT environments
     # Call 'byebug' anywhere in the code to stop execution and get a debugger console
     gem 'byebug', platform: :mri
     gem 'rspec-rails', '~> 3.5'

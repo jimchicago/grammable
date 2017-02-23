@@ -11,5 +11,5 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe GramsHelper, type: :helper do
-
+  # Per TFP track #5, lesson #5, you removed a placeholder test from this line
 end
